@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2.rc.2/leaflet.js"
+    ></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2.rc.2/leaflet.css"
+      rel="stylesheet"
+    />
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.js"
+    ></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.css"
+      rel="stylesheet"
+    />
+-->
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/png" href="/icon.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+      integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+      integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+      crossorigin=""
+    ></script>
+
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.js"
+    ></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.css"
+      rel="stylesheet"
+    />
+
+    <script defer src="script.js"></script>
+    <title>mapty // Map your workouts</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <img src="logo.png" alt="Logo" class="logo" />
+
+      <ul class="workouts">
+        <form class="form hidden">
+          <header>
+            <button style="display: none"></button>
+            <label class="form__btn">✖</label>
+          </header>
+
+          <div class="form__row">
+            <label class="form__label">Type</label>
+            <select class="form__input form__input--type">
+              <option value="running">Running</option>
+              <option value="cycling">Cycling</option>
+            </select>
+          </div>
+          <div class="form__row">
+            <label class="form__label">Distance</label>
+            <input class="form__input form__input--distance" placeholder="km" />
+          </div>
+          <div class="form__row">
+            <label class="form__label">Duration</label>
+            <input
+              class="form__input form__input--duration"
+              placeholder="min"
+            />
+          </div>
+          <div class="form__row">
+            <label class="form__label">Cadence</label>
+            <input
+              class="form__input form__input--cadence"
+              placeholder="step/min"
+            />
+          </div>
+          <div class="form__row form__row--hidden">
+            <label class="form__label">Elev Gain</label>
+            <input
+              class="form__input form__input--elevation"
+              placeholder="meters"
+            />
+          </div>
+        </form>
+
+        <li class="form__error hidden">
+          <label> Wrong input! Values must be positive numbers.</label>
+        </li>
+
+        <!-- <li class="workout workout--running" data-id="1234567890">
+          <h2 class="workout__title">Running on April 14</h2>
+          <div class="workout__details">
+            <span class="workout__icon">🏃‍♂️</span>
+            <span class="workout__value">5.2</span>
+            <span class="workout__unit">km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⏱</span>
+            <span class="workout__value">24</span>
+            <span class="workout__unit">min</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⚡️</span>
+            <span class="workout__value">4.6</span>
+            <span class="workout__unit">min/km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">🦶🏼</span>
+            <span class="workout__value">178</span>
+            <span class="workout__unit">spm</span>
+          </div>
+        </li>
+
+        <li class="workout workout--cycling" data-id="1234567891">
+          <h2 class="workout__title">Cycling on April 5</h2>
+          <div class="workout__details">
+            <span class="workout__icon">🚴‍♀️</span>
+            <span class="workout__value">27</span>
+            <span class="workout__unit">km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⏱</span>
+            <span class="workout__value">95</span>
+            <span class="workout__unit">min</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⚡️</span>
+            <span class="workout__value">16</span>
+            <span class="workout__unit">km/h</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⛰</span>
+            <span class="workout__value">223</span>
+            <span class="workout__unit">m</span>
+          </div>
+        </li> -->
+      </ul>
+
+      <!-- sort -->
+      <form class="sort">
+        <div class="sort__row">
+          <button class="sort__btn">Show all</button>
+          <button class="sort__btn" id="delete">Delete all</button>
+          <label class="sort__label">Sort by: </label>
+          <select class="sort__input">
+            <option value="date">Date</option>
+            <option value="duration">Duration</option>
+            <option value="distance">Distance</option>
+          </select>
+        </div>
+      </form>
+
+      <p class="copyright">
+        &copy; Copyright by
+        <a
+          class="twitter-link"
+          target="_blank"
+          href="https://twitter.com/jonasschmedtman"
+          >Jonas Schmedtmann</a
+        >. Use for learning or your portfolio. Don't use to teach. Don't claim
+        as your own.
+      </p>
+    </div>
+    <div id="map"></div>
+    <div class="modal hiddenModal" id="delModal">
+      <button class="btn--close-modal">&times;</button>
+      <h2 class="modal__header" style="display: flex; margin-top: 10px">
+        <span> ⚠ Delete workout </span>
+      </h2>
+      <form class="modal__form">
+        <span style="display: flex">
+          <button class="modalForm__btn">OK</button>
+        </span>
+      </form>
+    </div>
+
+    <div class="modal hiddenModal" id="delAllModal">
+      <button class="btn--close-modal">&times;</button>
+      <h2 class="modal__header" style="display: flex; margin-top: 10px">
+        <span> ⚠ Delete all? </span>
+      </h2>
+      <form class="modal__form">
+        <span style="display: flex">
+          <button class="modalForm__btn">OK</button>
+        </span>
+      </form>
+    </div>
+
+    <div class="overlay hiddenModal"></div>
+  </body>
+</html>
