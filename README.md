@@ -5,3 +5,4 @@
 - Added feature to draw course on map for run/cycle workout.
 - Enabled editing and deleting each workout.
 - Added option to sort workouts by certain data, show all workouts on map and delete all workouts.
+- Access app here: [https://mapty-k-project.netlify.app/](https://mapty-k-project.netlify.app/).
